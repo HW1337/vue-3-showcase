@@ -3,7 +3,7 @@
             <h4>Создание поста</h4>
             <input v-model="post.title" class="input" type="text" placeholder="Название"> 
             <input v-model="post.body" class="input" type="text" placeholder="Описание">
-            <button class="btn" >Создать пост</button>
+            <button class="btn" @click="createPost" >Создать пост</button>
         </form>
 </template>
 
@@ -15,6 +15,14 @@
                     title: '',
                     body: ''
                 }
+            }
+        },
+        methods: {
+            createPost(){
+                this.post.id= Date.mow();
+                this.posts.push(newPost);
+                this.title="";
+                this.body="";         
             }
         }
     }
