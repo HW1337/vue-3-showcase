@@ -19,10 +19,12 @@
         },
         methods: {
             createPost(){
-                this.post.id= Date.mow();
-                this.posts.push(newPost);
-                this.title="";
-                this.body="";         
+                this.post.id= Date.now();
+                this.$emit("create", this.post);
+                this.post = {
+                    title: '',
+                    body: ''
+                }
             }
         }
     }
