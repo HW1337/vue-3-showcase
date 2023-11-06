@@ -3,12 +3,16 @@
             <h4>Создание поста</h4>
             <input v-model="post.title" class="input" type="text" placeholder="Название"> 
             <input v-model="post.body" class="input" type="text" placeholder="Описание">
-            <button class="btn" @click="createPost" >Создать пост</button>
+            <my-button class="btn" style="align-self: flex-end; margin-top: 15px;" @click="createPost" >Создать пост</my-button>
         </form>
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton";
     export default {
+        components: {
+            MyButton
+        },
         data() {
             return {
                 post:{
@@ -31,14 +35,7 @@
 </script>
 
 <style scoped>
-.btn {
-    margin-top: 15px;
-    align-self: flex-end;
-    padding: 10px 15px;
-    background: none;
-    color: green;
-    border: 1px solid green;
-}
+
 .input {
     width: 100%;
     border: 1px solid green;
