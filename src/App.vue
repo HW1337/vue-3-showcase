@@ -1,7 +1,7 @@
 <template>
     <div class="app">
         <h1>Посты</h1>
-        <my-button @click="showDialog">Создать пост</my-button>
+        <my-button @click="showDialog" style="margin:15px 0;">Создать пост</my-button>
         <my-dialog v-model:show="dialogVisible">
             <post-form @create="createPost"/>
         </my-dialog>
@@ -29,6 +29,7 @@ export default {
     methods: {
         createPost (post) {
             this.posts.push(post);
+            this.dialogVisible = false;
         },
         removePost(post) {
             this.posts = this.posts.filter(p => p.id !== post.id)
