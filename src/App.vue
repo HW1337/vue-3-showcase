@@ -24,15 +24,14 @@ import PostList from "@/components/PostList";
 import MyButton from "@/components/UI/MyButton";
 import MySelect from "@/components/UI/MySelect";
 import axios from 'axios';
+import { getTransitionRawChildren } from "vue";
 export default {
     components: {
         MySelect, MyButton, PostList, PostForm
     },
     data () {
         return {
-            posts: [
-                
-            ],
+            posts: [],
             dialogVisible: false,
             isPostsLoading: false,
             selectedSort: '',
@@ -67,7 +66,14 @@ export default {
     },
     mounted () {
         this.fetchPosts();
-    }
+    },
+    watch: {
+        selectedSort(newValue) {
+            this.posts.sort((post1, post2)=> {
+                return post1[newValue]?.localeCompare(post2[newValue])
+            })
+        }
+    },
 }
 </script>
 <style>
