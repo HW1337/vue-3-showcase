@@ -21,7 +21,7 @@
             <post-list :posts="sortedAndSearchedPosts" @remove="removePost" v-if="!isPostsLoading"/>
             <div v-else> Идёт загрузка... </div>
             <div class="page__wrapper">
-            <div v-for="pageNumber in totalPages" :key="pageNumber" class="page" :class="{'current-page': page === pageNumber}"> {{ pageNumber }}</div>
+            <div v-for="pageNumber in totalPages" :key="pageNumber" class="page" :class="{'current-page': page === pageNumber}" @click="changePage(pageNumber)"> {{ pageNumber }}</div>
         </div>
     </div>
 </template>
@@ -31,7 +31,7 @@ import PostList from "@/components/PostList";
 import MyButton from "@/components/UI/MyButton";
 import MySelect from "@/components/UI/MySelect";
 import axios from 'axios';
-import { getTransitionRawChildren } from "vue";
+import { getCurrentInstance, getTransitionRawChildren } from "vue";
 export default {
     components: {
         MySelect, MyButton, PostList, PostForm
@@ -63,6 +63,9 @@ export default {
         showDialog() {
             this.dialogVisible = true;
         },
+        changePage(pageNumber) {
+            this.page = pageNumber
+        },
         async fetchPosts() {
             try {
                 this.isPostsLoading = true
@@ -92,6 +95,11 @@ export default {
             return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchPost.toLowerCase()))
         }
     },
+    watch: {
+        page(){
+            this.fetchPosts()
+        }
+    }
 }
 </script>
 <style>
