@@ -7,4 +7,6 @@ components.forEach(component => {
     app.component(component.name, component)
 })
 
-app.mount('#app')
+app
+    .use(router)
+    .mount('#app')
