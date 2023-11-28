@@ -1,5 +1,5 @@
 <template>
-    <div class="app">
+    <div>
         <h1>Посты</h1>
         <my-input 
         v-model="searchPost"
@@ -20,7 +20,7 @@
         </my-dialog>
             <post-list :posts="sortedAndSearchedPosts" @remove="removePost" v-if="!isPostsLoading"/>
             <div v-else> Идёт загрузка... </div>
-            <div ref="observer" class="observer"> </div>
+            <div v-intersection="loadMorePosts" class="observer"> </div>
     </div>
 </template>
 <script>
@@ -97,18 +97,7 @@ export default {
     mounted () {
         this.fetchPosts();
         this.$refs.observer
-        const options = {
-            rootMargin: "0px",
-            threshold: 1.0,
-        };
-        const callback = (entries, observer) => {
-            if(entries[0].isIntersecting && this.page < this.totalPages) {
-                this.loadMorePosts()
-            };
-        };
-        const observer = new IntersectionObserver(callback, options);
-        observer.observe(this.$refs.observer);
-    },
+    }, 
     computed: {
         sortedPosts() {
             return [...this.posts].sort((post1, post2)=> post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
