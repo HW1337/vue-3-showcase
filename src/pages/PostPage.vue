@@ -4,6 +4,7 @@
         <my-input 
         v-model="searchPost"
         placeholder="Поиск..."
+        v-focus
         />
         <div class="app__btns">
             <my-button
