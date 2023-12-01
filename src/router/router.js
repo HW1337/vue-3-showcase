@@ -15,6 +15,10 @@ const routes = [
         path: '/posts/:id',
         component: PostIdPage
     },
+    {
+    path: '/store',
+        component: PostPageWithStore
+    },
 ]
 
 const router = createRouter({
